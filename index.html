@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💗</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: "Poppins", Arial, sans-serif;
+        background: linear-gradient(135deg, #ffd6e7, #ffeef5, #ffc2d8);
+        overflow: hidden;
+        color: #5c3042;
+    }
+
+    .page {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    /* =========================
+       HALAMAN AWAL
+    ========================= */
+
+    .intro {
+        text-align: center;
+        animation: fadeIn 1.5s ease;
+    }
+
+    .intro h1 {
+        font-family: Georgia, serif;
+        font-size: clamp(32px, 7vw, 65px);
+        color: #b83263;
+        margin-bottom: 20px;
+    }
+
+    .intro p {
+        max-width: 600px;
+        line-height: 1.8;
+        font-size: 17px;
+        color: #704456;
+        margin: auto;
+    }
+
+    .open-btn {
+        margin-top: 35px;
+        border: none;
+        padding: 15px 35px;
+        border-radius: 50px;
+        background: #d94f82;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(217, 79, 130, .3);
+        transition: .3s;
+    }
+
+    .open-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        background: #c83d70;
+    }
+
+    /* =========================
+       AMPLOP
+    ========================= */
+
+    .envelope-container {
+        text-align: center;
+    }
+
+    .envelope {
+        position: relative;
+        width: 280px;
+        height: 190px;
+        margin: auto;
+        cursor: pointer;
+        perspective: 1000px;
+    }
+
+    .envelope-body {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 150px;
+        background: #f58caf;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 15px 30px rgba(150, 50, 90, .25);
+        z-index: 2;
+    }
+
+    .envelope-body::before,
+    .envelope-body::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+
+    .envelope-body::before {
+        left: 0;
+        border-width: 0 140px 100px 0;
+        border-color: transparent #e8789b transparent transparent;
+    }
+
+    .envelope-body::after {
+        right: 0;
+        border-width: 100px 140px 0 0;
+        border-color: #e8789b transparent transparent transparent;
+    }
+
+    .flap {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 140px solid transparent;
+        border-right: 140px solid transparent;
+        border-top: 100px solid #ffacc4;
+        transform-origin: top;
+        transition: 1s ease;
+        z-index: 4;
+    }
+
+    .envelope.open .flap {
+        transform: rotateX(180deg);
+        z-index: 1;
+    }
+
+    .letter {
+        position: absolute;
+        width: 235px;
+        height: 145px;
+        left: 22px;
+        bottom: 15px;
+        background: #fffafc;
+        border-radius: 8px;
+        padding: 20px;
+        z-index: 3;
+        transition: 1s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    }
+
+    .envelope.open .letter {
+        transform: translateY(-100px);
+    }
+
+    .envelope-container p {
+        margin-top: 30px;
+        color: #9b526d;
+        font-size: 15px;
+    }
+
+    /* =========================
+       SURAT
+    ========================= */
+
+    .letter-page {
+        overflow-y: auto;
+        padding: 40px 20px;
+    }
+
+    .card {
+        width: min(700px, 100%);
+        background: rgba(255,255,255,.88);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        padding: 45px 35px;
+        box-shadow: 0 20px 60px rgba(120,40,70,.18);
+        text-align: center;
+        animation: slideUp 1s ease;
+    }
+
+    .card h2 {
+        font-family: Georgia, serif;
+        font-size: 34px;
+        color: #b83263;
+        margin-bottom: 25px;
+    }
+
+    .romantic-text {
+        line-height: 2;
+        font-size: 16px;
+        color: #63404d;
+    }
+
+    .romantic-text p {
+        margin-bottom: 15px;
+    }
+
+    .question {
+        margin-top: 30px;
+        font-family: Georgia, serif;
+        font-size: 28px;
+        color: #b83263;
+    }
+
+    .buttons {
+        position: relative;
+        height: 130px;
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .yes-btn,
+    .no-btn {
+        border: none;
+        border-radius: 50px;
+        padding: 15px 32px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all .25s ease;
+    }
+
+    .yes-btn {
+        background: #e83f78;
+        color: white;
+        box-shadow: 0 8px 20px rgba(232,63,120,.3);
+    }
+
+    .yes-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .no-btn {
+        background: #eee;
+        color: #777;
+        position: relative;
+    }
+
+    /* =========================
+       HALAMAN AKHIR
+    ========================= */
+
+    .final {
+        text-align: center;
+        animation: fadeIn 1s ease;
+    }
+
+    .heart {
+        font-size: 90px;
+        animation: heartbeat 1.2s infinite;
+    }
+
+    .final h1 {
+        margin-top: 20px;
+        color: #b83263;
+        font-family: Georgia, serif;
+        font-size: clamp(35px, 8vw, 65px);
+    }
+
+    .final p {
+        margin-top: 20px;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #704456;
+    }
+
+    .floating-heart {
+        position: fixed;
+        bottom: -30px;
+        color: #e83f78;
+        font-size: 20px;
+        animation: floatUp linear forwards;
+        pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes heartbeat {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+    }
+
+    @keyframes floatUp {
+        to {
+            transform: translateY(-110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .card {
+            padding: 30px 20px;
+        }
+
+        .romantic-text {
+            font-size: 14px;
+        }
+
+        .envelope {
+            transform: scale(.85);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HALAMAN 1
+========================= -->
+
+<section id="introPage" class="page">
+    <div class="intro">
+
+        <h1>Untuk Seseorang...</h1>
+
+        <p>
+            Ada sesuatu yang sudah lama ingin aku sampaikan.
+            Bukan sesuatu yang bisa dijelaskan hanya dengan satu kalimat,
+            tapi mungkin sebuah surat kecil bisa mewakilinya.
+        </p>
+
+        <p style="margin-top:15px;">
+            Jadi... kalau kamu punya sedikit waktu,
+            bukalah sesuatu yang sudah aku siapkan untukmu. 💌
+        </p>
+
+        <button class="open-btn" onclick="openEnvelope()">
+            Open 💌
+        </button>
+
+    </div>
+</section>
+
+<!-- =========================
+     HALAMAN 2
+========================= -->
+
+<section id="envelopePage" class="page hidden">
+
+    <div class="envelope-container">
+
+        <div id="envelope" class="envelope" onclick="showLetter()">
+
+            <div class="letter">
+                💗
+            </div>
+
+            <div class="flap"></div>
+
+            <div class="envelope-body"></div>
+
+        </div>
+
+        <p>Klik amplopnya... ada sesuatu untukmu 💕</p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     HALAMAN 3
+========================= -->
+
+<section id="letterPage" class="page letter-page hidden">
+
+    <div class="card">
+
+        <h2>Dear You 💗</h2>
+
+        <div class="romantic-text">
+
+            <p>
+                Aku sebenarnya tidak tahu harus mulai dari mana.
+                Karena setiap kali ingin mengatakan ini,
+                selalu saja ada rasa gugup yang datang lebih dulu.
+            </p>
+
+            <p>
+                Tapi semakin lama aku mengenalmu,
+                semakin aku sadar bahwa ada seseorang
+                yang selalu berhasil membuat hari-hariku terasa sedikit lebih indah.
+            </p>
+
+            <p>
+                Seseorang yang tanpa sadar sering muncul
+                di pikiranku, bahkan ketika aku sedang melakukan
+                hal-hal sederhana.
+            </p>
+
+            <p>
+                Dan orang itu...
+                adalah kamu.
+            </p>
+
+            <p>
+                Aku tidak ingin menjanjikan sesuatu yang terlalu besar.
+                Aku hanya ingin jujur tentang apa yang aku rasakan.
+            </p>
+
+            <p>
+                Aku suka caramu tersenyum.
+                Aku suka caramu berbicara.
+                Dan entah sejak kapan,
+                aku mulai suka keberadaanmu lebih dari yang seharusnya.
+            </p>
+
+            <p>
+                Jadi hari ini aku memberanikan diri
+                untuk menanyakan satu hal...
+            </p>
+
+        </div>
+
+        <div class="question">
+            Mau nggak jadi seseorang yang spesial buat aku? ❤️
+        </div>
+
+        <div class="buttons">
+
+            <button
+                id="yesBtn"
+                class="yes-btn"
+                onclick="sayYes()">
+                YES ❤️
+            </button>
+
+            <button
+                id="noBtn"
+                class="no-btn"
+                onmouseenter="runAway()"
+                ontouchstart="runAway()">
+                NO 😭
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     HALAMAN AKHIR
+========================= -->
+
+<section id="finalPage" class="page hidden">
+
+    <div class="final">
+
+        <div class="heart">❤️</div>
+
+        <h1>YEEEEAY! 🥹💕</h1>
+
+        <p>
+            Terima kasih sudah memilih YES.
+            <br>
+            Mulai hari ini, boleh ya aku jadi orang
+            yang selalu berusaha membuatmu tersenyum? 💗
+        </p>
+
+        <p>
+            — someone who really likes you —
+        </p>
+
+    </div>
+
+</section>
+
+<script>
+
+    const introPage = document.getElementById("introPage");
+    const envelopePage = document.getElementById("envelopePage");
+    const letterPage = document.getElementById("letterPage");
+    const finalPage = document.getElementById("finalPage");
+
+    const envelope = document.getElementById("envelope");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    let noSize = 1;
+    let yesSize = 1;
+
+    // =========================
+    // PINDAH KE AMPLOP
+    // =========================
+
+    function openEnvelope() {
+
+        introPage.classList.add("hidden");
+        envelopePage.classList.remove("hidden");
+
+    }
+
+    // =========================
+    // BUKA AMPLOP
+    // =========================
+
+    function showLetter() {
+
+        if (!envelope.classList.contains("open")) {
+
+            envelope.classList.add("open");
+
+            setTimeout(() => {
+
+                envelopePage.classList.add("hidden");
+                letterPage.classList.remove("hidden");
+
+            }, 1400);
+
+        }
+
+    }
+
+    // =========================
+    // TOMBOL NO KABUR
+    // =========================
+
+    function runAway() {
+
+        const container = document.querySelector(".buttons");
+
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const maxX = Math.max(
+            0,
+            containerWidth - noBtn.offsetWidth
+        );
+
+        const maxY = Math.max(
+            0,
+            containerHeight - noBtn.offsetHeight
+        );
+
+        const randomX = Math.random() * maxX - maxX / 2;
+        const randomY = Math.random() * maxY - maxY / 2;
+
+        noBtn.style.position = "absolute";
+
+        noBtn.style.transform =
+            `translate(${randomX}px, ${randomY}px) scale(${noSize})`;
+
+        // NO semakin kecil
+        noSize -= 0.12;
+
+        if (noSize < 0.25) {
+            noSize = 0.25;
+        }
+
+        // YES semakin besar
+        yesSize += 0.15;
+
+        if (yesSize > 2) {
+            yesSize = 2;
+        }
+
+        yesBtn.style.transform =
+            `scale(${yesSize})`;
+
+        createHeart();
+
+    }
+
+    // =========================
+    // YES
+    // =========================
+
+    function sayYes() {
+
+        letterPage.classList.add("hidden");
+        finalPage.classList.remove("hidden");
+
+        for (let i = 0; i < 30; i++) {
+
+            setTimeout(() => {
+                createHeart();
+            }, i * 100);
+
+        }
+
+    }
+
+    // =========================
+    // HATI MELAYANG
+    // =========================
+
+    function createHeart() {
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating-heart";
+
+        const hearts = ["❤️", "💕", "💗", "💖", "💘"];
+
+        heart.innerText =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 7000);
+
+    }
+
+</script>
+
+</body>
+</html>
+```
