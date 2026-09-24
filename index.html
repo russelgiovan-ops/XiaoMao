@@ -8,10 +8,7 @@
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <meta
-        name="theme-color"
-        content="#ffd6e7"
-    >
+    <meta name="theme-color" content="#ffd6e7">
 
     <title>For You 💗</title>
 
@@ -20,9 +17,7 @@
            RESET
         ===================================================== */
 
-        *,
-        *::before,
-        *::after {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -39,49 +34,32 @@
             min-height: 100vh;
             min-height: 100dvh;
 
-            font-family:
-                "Poppins",
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                sans-serif;
-
-            color: #5c3042;
+            font-family: "Poppins", Arial, sans-serif;
 
             background:
                 linear-gradient(
                     135deg,
-                    #ffd6e7 0%,
-                    #ffeef5 50%,
-                    #ffc2d8 100%
+                    #ffd6e7,
+                    #ffeef5,
+                    #ffc2d8
                 );
 
+            color: #5c3042;
+
             /*
+             * PENTING:
              * Jangan gunakan overflow: hidden.
-             * Body harus tetap bisa scroll di Android/iOS.
+             * Ini yang membuat halaman HP tidak bisa scroll.
              */
             overflow-x: hidden;
             overflow-y: auto;
 
-            /*
-             * Mencegah iOS memperbesar teks secara otomatis.
-             */
             -webkit-text-size-adjust: 100%;
-
-            /*
-             * Smooth scrolling di iOS.
-             */
             -webkit-overflow-scrolling: touch;
         }
 
         button {
             font-family: inherit;
-        }
-
-        button,
-        .envelope {
-            -webkit-tap-highlight-color: transparent;
         }
 
         .hidden {
@@ -90,7 +68,7 @@
 
 
         /* =====================================================
-           PAGE
+           GENERAL PAGE
         ===================================================== */
 
         .page {
@@ -103,15 +81,15 @@
             align-items: center;
 
             padding:
-                40px
+                30px
                 max(20px, env(safe-area-inset-right))
-                40px
+                30px
                 max(20px, env(safe-area-inset-left));
         }
 
 
         /* =====================================================
-           INTRO
+           HALAMAN AWAL
         ===================================================== */
 
         .intro {
@@ -120,33 +98,31 @@
 
             text-align: center;
 
-            animation:
-                fadeIn 1.2s ease forwards;
+            animation: fadeIn 1.2s ease;
         }
 
         .intro h1 {
-            margin-bottom: 22px;
-
-            font-family: Georgia, "Times New Roman", serif;
+            font-family: Georgia, serif;
 
             font-size:
-                clamp(34px, 8vw, 65px);
+                clamp(32px, 7vw, 65px);
 
-            line-height: 1.15;
+            line-height: 1.2;
 
             color: #b83263;
+
+            margin-bottom: 20px;
         }
 
         .intro p {
             width: 100%;
             max-width: 600px;
 
-            margin: 0 auto;
-
-            font-size:
-                clamp(15px, 2.5vw, 17px);
+            margin: auto;
 
             line-height: 1.8;
+
+            font-size: 17px;
 
             color: #704456;
         }
@@ -163,39 +139,39 @@
         .open-btn {
             margin-top: 35px;
 
-            border: 0;
+            border: none;
 
-            padding:
-                15px 35px;
+            padding: 15px 35px;
 
-            border-radius: 999px;
+            border-radius: 50px;
 
             background: #d94f82;
 
-            color: #ffffff;
+            color: white;
 
             font-size: 17px;
-            font-weight: 700;
+
+            font-weight: bold;
 
             cursor: pointer;
 
             box-shadow:
                 0 10px 25px
-                rgba(217, 79, 130, .30);
+                rgba(217, 79, 130, .3);
 
-            transition:
-                transform .25s ease,
-                background .25s ease;
+            transition: .3s;
 
             touch-action: manipulation;
+
+            -webkit-tap-highlight-color: transparent;
         }
 
         .open-btn:hover {
-            background: #c83d70;
-
             transform:
-                translateY(-4px)
-                scale(1.04);
+                translateY(-5px)
+                scale(1.05);
+
+            background: #c83d70;
         }
 
         .open-btn:active {
@@ -204,16 +180,11 @@
 
 
         /* =====================================================
-           ENVELOPE
+           AMPLOP
         ===================================================== */
-
-        .envelope-page {
-            overflow: hidden;
-        }
 
         .envelope-container {
             width: 100%;
-
             text-align: center;
         }
 
@@ -223,7 +194,7 @@
             width: 280px;
             height: 190px;
 
-            margin: 0 auto;
+            margin: auto;
 
             cursor: pointer;
 
@@ -235,7 +206,6 @@
         .envelope-body {
             position: absolute;
 
-            left: 0;
             bottom: 0;
 
             width: 100%;
@@ -258,6 +228,7 @@
             content: "";
 
             position: absolute;
+
             bottom: 0;
 
             width: 0;
@@ -320,32 +291,27 @@
 
         .envelope.open .flap {
             transform: rotateX(180deg);
-
             z-index: 1;
         }
 
         .letter {
             position: absolute;
 
-            left: 22px;
-            bottom: 15px;
-
             width: 235px;
             height: 145px;
 
-            padding: 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            left: 22px;
+            bottom: 15px;
 
             background: #fffafc;
 
             border-radius: 8px;
 
-            box-shadow:
-                0 5px 15px
-                rgba(0, 0, 0, .08);
+            padding: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             font-size: 30px;
 
@@ -353,6 +319,10 @@
 
             transition:
                 transform 1s ease;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0, 0, 0, .08);
         }
 
         .envelope.open .letter {
@@ -360,7 +330,7 @@
                 translateY(-100px);
         }
 
-        .envelope-container > p {
+        .envelope-container p {
             margin-top: 30px;
 
             color: #9b526d;
@@ -370,13 +340,13 @@
 
 
         /* =====================================================
-           LETTER PAGE
+           HALAMAN SURAT
         ===================================================== */
 
         .letter-page {
             /*
-             * Sangat penting:
-             * jangan lock height dan jangan overflow:hidden.
+             * Jangan memakai overflow:hidden di sini.
+             * Halaman boleh menjadi lebih tinggi dari layar.
              */
             min-height: 100vh;
             min-height: 100dvh;
@@ -387,17 +357,12 @@
             padding-bottom: 80px;
 
             overflow: visible;
-
-            -webkit-overflow-scrolling: touch;
         }
 
         .card {
             width: min(700px, 100%);
 
             margin: 0 auto;
-
-            padding:
-                45px 35px;
 
             background:
                 rgba(255, 255, 255, .88);
@@ -410,6 +375,8 @@
 
             border-radius: 25px;
 
+            padding: 45px 35px;
+
             box-shadow:
                 0 20px 60px
                 rgba(120, 40, 70, .18);
@@ -417,50 +384,41 @@
             text-align: center;
 
             animation:
-                slideUp .8s ease forwards;
+                slideUp 1s ease;
         }
 
         .card h2 {
-            margin-bottom: 25px;
+            font-family: Georgia, serif;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+            font-size: 34px;
 
-            font-size:
-                clamp(28px, 6vw, 34px);
-
-            line-height: 1.25;
+            line-height: 1.3;
 
             color: #b83263;
+
+            margin-bottom: 25px;
         }
 
         .romantic-text {
-            color: #63404d;
+            line-height: 2;
 
             font-size: 16px;
 
-            line-height: 2;
+            color: #63404d;
 
             overflow-wrap: break-word;
-            word-wrap: break-word;
         }
 
         .romantic-text p {
-            margin-bottom: 16px;
+            margin-bottom: 15px;
         }
 
         .question {
             margin-top: 30px;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+            font-family: Georgia, serif;
 
-            font-size:
-                clamp(23px, 6vw, 29px);
+            font-size: 28px;
 
             line-height: 1.4;
 
@@ -477,9 +435,9 @@
 
             width: 100%;
 
-            min-height: 170px;
+            height: 150px;
 
-            margin-top: 30px;
+            margin-top: 25px;
 
             display: flex;
 
@@ -493,61 +451,55 @@
 
         .yes-btn,
         .no-btn {
-            border: 0;
+            border: none;
 
-            border-radius: 999px;
+            border-radius: 50px;
 
-            padding:
-                15px 32px;
+            padding: 15px 32px;
 
             font-size: 16px;
 
-            font-weight: 700;
+            font-weight: bold;
 
             cursor: pointer;
 
-            white-space: nowrap;
-
             transition:
-                transform .25s ease,
-                background .25s ease;
+                transform .25s ease;
 
-            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+
+            white-space: nowrap;
         }
 
         .yes-btn {
             background: #e83f78;
 
-            color: #ffffff;
+            color: white;
 
             box-shadow:
                 0 8px 20px
-                rgba(232, 63, 120, .30);
+                rgba(232, 63, 120, .3);
 
             z-index: 5;
         }
 
         .yes-btn:hover {
-            transform: scale(1.08);
-        }
-
-        .yes-btn:active {
-            transform: scale(.96);
+            transform: scale(1.1);
         }
 
         .no-btn {
+            background: #eee;
+
+            color: #777;
+
             position: relative;
-
-            background: #eeeeee;
-
-            color: #777777;
 
             z-index: 4;
         }
 
 
         /* =====================================================
-           FINAL PAGE
+           HALAMAN AKHIR
         ===================================================== */
 
         .final {
@@ -557,12 +509,12 @@
             text-align: center;
 
             animation:
-                fadeIn 1s ease forwards;
+                fadeIn 1s ease;
         }
 
         .heart {
             font-size:
-                clamp(65px, 18vw, 90px);
+                clamp(70px, 18vw, 90px);
 
             line-height: 1;
 
@@ -571,19 +523,16 @@
         }
 
         .final h1 {
-            margin-top: 25px;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(35px, 9vw, 65px);
-
-            line-height: 1.15;
+            margin-top: 20px;
 
             color: #b83263;
+
+            font-family: Georgia, serif;
+
+            font-size:
+                clamp(35px, 8vw, 65px);
+
+            line-height: 1.2;
         }
 
         .final p {
@@ -605,25 +554,27 @@
         .floating-heart {
             position: fixed;
 
-            left: 0;
-            bottom: -40px;
-
-            pointer-events: none;
+            bottom: -30px;
 
             color: #e83f78;
 
-            z-index: 9999;
+            font-size: 20px;
 
             animation:
                 floatUp linear forwards;
+
+            pointer-events: none;
+
+            z-index: 9999;
         }
 
 
         /* =====================================================
-           ANIMATIONS
+           ANIMATION
         ===================================================== */
 
         @keyframes fadeIn {
+
             from {
                 opacity: 0;
 
@@ -640,11 +591,12 @@
         }
 
         @keyframes slideUp {
+
             from {
                 opacity: 0;
 
                 transform:
-                    translateY(50px);
+                    translateY(60px);
             }
 
             to {
@@ -656,6 +608,7 @@
         }
 
         @keyframes heartbeat {
+
             0%,
             100% {
                 transform: scale(1);
@@ -667,6 +620,7 @@
         }
 
         @keyframes floatUp {
+
             to {
                 transform:
                     translateY(-110vh)
@@ -689,8 +643,7 @@
             }
 
             .card {
-                padding:
-                    35px 25px;
+                padding: 35px 25px;
             }
         }
 
@@ -704,11 +657,10 @@
             .page {
                 min-height: 100dvh;
 
-                padding-top: 25px;
-                padding-right: 16px;
-                padding-bottom: 60px;
-                padding-left: 16px;
+                padding:
+                    25px 16px 60px;
             }
+
 
             /* INTRO */
 
@@ -731,16 +683,16 @@
             }
 
 
-            /* ENVELOPE */
+            /* AMPLOP */
 
             .envelope {
-                transform: scale(.78);
+                transform: scale(.82);
 
                 margin-top: -5px;
-                margin-bottom: -15px;
+                margin-bottom: -10px;
             }
 
-            .envelope-container > p {
+            .envelope-container p {
                 padding:
                     0 15px;
 
@@ -748,15 +700,13 @@
             }
 
 
-            /* LETTER */
+            /* SURAT */
 
             .letter-page {
                 align-items: flex-start;
 
-                padding-top: 25px;
-                padding-right: 12px;
-                padding-bottom: 70px;
-                padding-left: 12px;
+                padding:
+                    25px 12px 70px;
             }
 
             .card {
@@ -769,6 +719,8 @@
             }
 
             .card h2 {
+                font-size: 30px;
+
                 margin-bottom: 20px;
             }
 
@@ -791,10 +743,10 @@
             }
 
 
-            /* BUTTONS */
+            /* BUTTON */
 
             .buttons {
-                min-height: 160px;
+                height: 160px;
 
                 gap: 12px;
             }
@@ -811,8 +763,7 @@
             /* FINAL */
 
             .final {
-                padding:
-                    20px 5px;
+                padding: 20px 5px;
             }
         }
 
@@ -829,7 +780,7 @@
             .page {
                 align-items: flex-start;
 
-                padding-top: 25px;
+                padding-top: 30px;
             }
 
             .intro {
@@ -851,19 +802,26 @@
             *,
             *::before,
             *::after {
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
+                animation-duration:
+                    .01ms !important;
 
-                scroll-behavior: auto !important;
+                animation-iteration-count:
+                    1 !important;
 
-                transition-duration: .01ms !important;
+                transition-duration:
+                    .01ms !important;
+
+                scroll-behavior:
+                    auto !important;
             }
         }
+
     </style>
 </head>
 
 
 <body>
+
 
     <!-- =====================================================
          HALAMAN 1
@@ -882,9 +840,8 @@
 
             <p>
                 Ada sesuatu yang sudah lama ingin aku sampaikan.
-                Bukan sesuatu yang bisa dijelaskan hanya dengan satu
-                kalimat, tapi mungkin sebuah surat kecil bisa
-                mewakilinya.
+                Bukan sesuatu yang bisa dijelaskan hanya dengan satu kalimat,
+                tapi mungkin sebuah surat kecil bisa mewakilinya.
             </p>
 
             <p>
@@ -893,9 +850,9 @@
             </p>
 
             <button
-                type="button"
-                class="open-btn"
                 id="openBtn"
+                class="open-btn"
+                type="button"
             >
                 Open 💌
             </button>
@@ -919,9 +876,6 @@
             <div
                 id="envelope"
                 class="envelope"
-                role="button"
-                tabindex="0"
-                aria-label="Buka amplop"
             >
 
                 <div class="letter">
@@ -959,6 +913,7 @@
                 Dear You 💗
             </h2>
 
+
             <div class="romantic-text">
 
                 <p>
@@ -986,17 +941,15 @@
                 </p>
 
                 <p>
-                    Aku tidak ingin menjanjikan sesuatu yang terlalu
-                    besar. Aku hanya ingin jujur tentang apa yang
-                    aku rasakan.
+                    Aku tidak ingin menjanjikan sesuatu yang terlalu besar.
+                    Aku hanya ingin jujur tentang apa yang aku rasakan.
                 </p>
 
                 <p>
                     Aku suka caramu tersenyum.
                     Aku suka caramu berbicara.
                     Dan entah sejak kapan,
-                    aku mulai suka keberadaanmu lebih dari
-                    yang seharusnya.
+                    aku mulai suka keberadaanmu lebih dari yang seharusnya.
                 </p>
 
                 <p>
@@ -1015,17 +968,17 @@
             <div class="buttons">
 
                 <button
-                    type="button"
                     id="yesBtn"
                     class="yes-btn"
+                    type="button"
                 >
                     YES ❤️
                 </button>
 
                 <button
-                    type="button"
                     id="noBtn"
                     class="no-btn"
+                    type="button"
                 >
                     NO 😭
                 </button>
@@ -1038,7 +991,7 @@
 
 
     <!-- =====================================================
-         HALAMAN 4 — FINAL
+         HALAMAN AKHIR
     ===================================================== -->
 
     <section
@@ -1078,13 +1031,6 @@
 
     <script>
 
-        "use strict";
-
-
-        /* =====================================================
-           ELEMENTS
-        ===================================================== */
-
         const introPage =
             document.getElementById("introPage");
 
@@ -1110,47 +1056,38 @@
             document.getElementById("noBtn");
 
 
-        /* =====================================================
-           STATE
-        ===================================================== */
-
         let noSize = 1;
         let yesSize = 1;
-
-        let envelopeOpened = false;
+        let envelopeIsOpen = false;
 
 
         /* =====================================================
-           HELPER — SHOW PAGE
+           PINDAH HALAMAN
         ===================================================== */
 
         function showPage(page) {
 
-            const pages = [
-                introPage,
-                envelopePage,
-                letterPage,
-                finalPage
-            ];
-
-            pages.forEach(function (item) {
-                item.classList.add("hidden");
-            });
+            introPage.classList.add("hidden");
+            envelopePage.classList.add("hidden");
+            letterPage.classList.add("hidden");
+            finalPage.classList.add("hidden");
 
             page.classList.remove("hidden");
 
             /*
-             * Kembali ke atas setiap pindah halaman.
+             * Pastikan setiap halaman dimulai
+             * dari bagian paling atas.
              */
             window.scrollTo({
                 top: 0,
-                behavior: "instant"
+                left: 0,
+                behavior: "auto"
             });
         }
 
 
         /* =====================================================
-           OPEN BUTTON
+           OPEN
         ===================================================== */
 
         openBtn.addEventListener(
@@ -1164,61 +1101,39 @@
 
 
         /* =====================================================
-           OPEN ENVELOPE
+           AMPLOP
         ===================================================== */
-
-        function showLetter() {
-
-            if (envelopeOpened) {
-                return;
-            }
-
-            envelopeOpened = true;
-
-            envelope.classList.add("open");
-
-            /*
-             * Tunggu animasi amplop selesai.
-             */
-            setTimeout(
-                function () {
-
-                    showPage(letterPage);
-
-                },
-                1200
-            );
-        }
-
 
         envelope.addEventListener(
             "click",
-            showLetter
-        );
+            function () {
 
-
-        /*
-         * Support keyboard.
-         */
-        envelope.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    showLetter();
+                if (envelopeIsOpen) {
+                    return;
                 }
+
+                envelopeIsOpen = true;
+
+                envelope.classList.add("open");
+
+                /*
+                 * Tunggu animasi amplop.
+                 */
+                setTimeout(
+                    function () {
+
+                        showPage(letterPage);
+
+                    },
+                    1400
+                );
+
             }
         );
 
 
         /* =====================================================
-           NO BUTTON
+           TOMBOL NO
         ===================================================== */
 
         function runAway() {
@@ -1226,24 +1141,12 @@
             const container =
                 document.querySelector(".buttons");
 
-            if (!container) {
-                return;
-            }
-
-
-            /*
-             * Ukuran area tombol.
-             */
             const containerWidth =
                 container.clientWidth;
 
             const containerHeight =
                 container.clientHeight;
 
-
-            /*
-             * Ukuran tombol NO.
-             */
             const buttonWidth =
                 noBtn.offsetWidth;
 
@@ -1252,45 +1155,51 @@
 
 
             /*
-             * Batas aman.
-             */
-            const padding = 10;
-
-
-            /*
-             * Area gerak.
+             * Batas pergerakan.
+             * Tombol tidak boleh keluar dari area.
              */
             const maxX =
                 Math.max(
-                    0,
-                    (containerWidth - buttonWidth) / 2
-                    - padding
+                    20,
+                    (containerWidth - buttonWidth) / 2 - 15
                 );
 
             const maxY =
                 Math.max(
-                    0,
-                    (containerHeight - buttonHeight) / 2
-                    - padding
+                    20,
+                    (containerHeight - buttonHeight) / 2 - 15
                 );
 
 
-            /*
-             * Posisi random.
-             */
             const randomX =
-                (Math.random() * 2 - 1)
-                * maxX;
+                (Math.random() * 2 - 1) * maxX;
 
             const randomY =
-                (Math.random() * 2 - 1)
-                * maxY;
+                (Math.random() * 2 - 1) * maxY;
 
 
             /*
-             * Jadikan absolute,
-             * tetapi tetap berada di dalam
-             * area .buttons.
+             * NO semakin kecil.
+             */
+            noSize -= 0.12;
+
+            if (noSize < 0.3) {
+                noSize = 0.3;
+            }
+
+
+            /*
+             * YES semakin besar.
+             */
+            yesSize += 0.12;
+
+            if (yesSize > 1.8) {
+                yesSize = 1.8;
+            }
+
+
+            /*
+             * Posisikan tombol dari tengah.
              */
             noBtn.style.position =
                 "absolute";
@@ -1300,27 +1209,6 @@
 
             noBtn.style.top =
                 "50%";
-
-
-            /*
-             * NO semakin kecil.
-             */
-            noSize -= .12;
-
-            if (noSize < .30) {
-                noSize = .30;
-            }
-
-
-            /*
-             * YES semakin besar.
-             */
-            yesSize += .12;
-
-            if (yesSize > 1.8) {
-                yesSize = 1.8;
-            }
-
 
             noBtn.style.transform =
                 `
@@ -1341,8 +1229,7 @@
 
 
         /*
-         * Desktop:
-         * ketika mouse mendekati tombol.
+         * Desktop.
          */
         noBtn.addEventListener(
             "mouseenter",
@@ -1351,8 +1238,7 @@
 
 
         /*
-         * Mobile:
-         * ketika tombol disentuh.
+         * Android + iPhone.
          */
         noBtn.addEventListener(
             "touchstart",
@@ -1361,23 +1247,10 @@
                 event.preventDefault();
 
                 runAway();
+
             },
             {
                 passive: false
-            }
-        );
-
-
-        /*
-         * Tambahan untuk click.
-         */
-        noBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                runAway();
             }
         );
 
@@ -1388,34 +1261,31 @@
 
         yesBtn.addEventListener(
             "click",
-            sayYes
-        );
+            function () {
 
+                showPage(finalPage);
 
-        function sayYes() {
+                /*
+                 * Hujan hati.
+                 */
+                for (
+                    let i = 0;
+                    i < 30;
+                    i++
+                ) {
 
-            showPage(finalPage);
+                    setTimeout(
+                        function () {
 
+                            createHeart();
 
-            /*
-             * Hujan hati.
-             */
-            for (
-                let i = 0;
-                i < 30;
-                i++
-            ) {
+                        },
+                        i * 100
+                    );
+                }
 
-                setTimeout(
-                    function () {
-
-                        createHeart();
-
-                    },
-                    i * 100
-                );
             }
-        }
+        );
 
 
         /* =====================================================
@@ -1449,27 +1319,16 @@
                 ];
 
 
-            /*
-             * Posisi horizontal.
-             */
             heart.style.left =
                 Math.random() * 100 + "vw";
 
 
-            /*
-             * Durasi.
-             */
             heart.style.animationDuration =
-                (3 + Math.random() * 4)
-                + "s";
+                (3 + Math.random() * 4) + "s";
 
 
-            /*
-             * Ukuran.
-             */
             heart.style.fontSize =
-                (15 + Math.random() * 25)
-                + "px";
+                (15 + Math.random() * 25) + "px";
 
 
             document.body.appendChild(
@@ -1477,9 +1336,6 @@
             );
 
 
-            /*
-             * Hapus setelah animasi.
-             */
             setTimeout(
                 function () {
 
