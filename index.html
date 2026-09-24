@@ -724,3 +724,320 @@ body {
         padding-top: 20px;
     }
 }
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HALAMAN 1
+========================= -->
+
+<section id="introPage" class="page">
+    <div class="intro">
+
+        <h1>Untuk Seseorang...</h1>
+
+        <p>
+            Ada sesuatu yang sudah lama ingin aku sampaikan.
+            Bukan sesuatu yang bisa dijelaskan hanya dengan satu kalimat,
+            tapi mungkin sebuah surat kecil bisa mewakilinya.
+        </p>
+
+        <p style="margin-top:15px;">
+            Jadi... kalau kamu punya sedikit waktu,
+            bukalah sesuatu yang sudah aku siapkan untukmu. 💌
+        </p>
+
+        <button class="open-btn" onclick="openEnvelope()">
+            Open 💌
+        </button>
+
+    </div>
+</section>
+
+<!-- =========================
+     HALAMAN 2
+========================= -->
+
+<section id="envelopePage" class="page hidden">
+
+    <div class="envelope-container">
+
+        <div id="envelope" class="envelope" onclick="showLetter()">
+
+            <div class="letter">
+                💗
+            </div>
+
+            <div class="flap"></div>
+
+            <div class="envelope-body"></div>
+
+        </div>
+
+        <p>Klik amplopnya... ada sesuatu untukmu 💕</p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     HALAMAN 3
+========================= -->
+
+<section id="letterPage" class="page letter-page hidden">
+
+    <div class="card">
+
+        <h2>Dear You 💗</h2>
+
+        <div class="romantic-text">
+
+            <p>
+                Aku sebenarnya tidak tahu harus mulai dari mana.
+                Karena setiap kali ingin mengatakan ini,
+                selalu saja ada rasa gugup yang datang lebih dulu.
+            </p>
+
+            <p>
+                Tapi semakin lama aku mengenalmu,
+                semakin aku sadar bahwa ada seseorang
+                yang selalu berhasil membuat hari-hariku terasa sedikit lebih indah.
+            </p>
+
+            <p>
+                Seseorang yang tanpa sadar sering muncul
+                di pikiranku, bahkan ketika aku sedang melakukan
+                hal-hal sederhana.
+            </p>
+
+            <p>
+                Dan orang itu...
+                adalah kamu.
+            </p>
+
+            <p>
+                Aku tidak ingin menjanjikan sesuatu yang terlalu besar.
+                Aku hanya ingin jujur tentang apa yang aku rasakan.
+            </p>
+
+            <p>
+                Aku suka caramu tersenyum.
+                Aku suka caramu berbicara.
+                Dan entah sejak kapan,
+                aku mulai suka keberadaanmu lebih dari yang seharusnya.
+            </p>
+
+            <p>
+                Jadi hari ini aku memberanikan diri
+                untuk menanyakan satu hal...
+            </p>
+
+        </div>
+
+        <div class="question">
+            Mau nggak jadi seseorang yang spesial buat aku? ❤️
+        </div>
+
+        <div class="buttons">
+
+            <button
+                id="yesBtn"
+                class="yes-btn"
+                onclick="sayYes()">
+                YES ❤️
+            </button>
+
+            <button
+                id="noBtn"
+                class="no-btn"
+                onmouseenter="runAway()"
+                ontouchstart="runAway()">
+                NO 😭
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     HALAMAN AKHIR
+========================= -->
+
+<section id="finalPage" class="page hidden">
+
+    <div class="final">
+
+        <div class="heart">❤️</div>
+
+        <h1>YEEEEAY! 🥹💕</h1>
+
+        <p>
+            Terima kasih sudah memilih YES.
+            <br>
+            Mulai hari ini, boleh ya aku jadi orang
+            yang selalu berusaha membuatmu tersenyum? 💗
+        </p>
+
+        <p>
+            — someone who really likes you —
+        </p>
+
+    </div>
+
+</section>
+
+<script>
+
+    const introPage = document.getElementById("introPage");
+    const envelopePage = document.getElementById("envelopePage");
+    const letterPage = document.getElementById("letterPage");
+    const finalPage = document.getElementById("finalPage");
+
+    const envelope = document.getElementById("envelope");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    let noSize = 1;
+    let yesSize = 1;
+
+    // =========================
+    // PINDAH KE AMPLOP
+    // =========================
+
+    function openEnvelope() {
+
+        introPage.classList.add("hidden");
+        envelopePage.classList.remove("hidden");
+
+    }
+
+    // =========================
+    // BUKA AMPLOP
+    // =========================
+
+    function showLetter() {
+
+        if (!envelope.classList.contains("open")) {
+
+            envelope.classList.add("open");
+
+            setTimeout(() => {
+
+                envelopePage.classList.add("hidden");
+                letterPage.classList.remove("hidden");
+
+            }, 1400);
+
+        }
+
+    }
+
+    // =========================
+    // TOMBOL NO
+    // =========================
+
+    function runAway() {
+
+        const container = document.querySelector(".buttons");
+
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const maxX = Math.max(
+            0,
+            containerWidth - noBtn.offsetWidth
+        );
+
+        const maxY = Math.max(
+            0,
+            containerHeight - noBtn.offsetHeight
+        );
+
+        const randomX = Math.random() * maxX - maxX / 2;
+        const randomY = Math.random() * maxY - maxY / 2;
+
+        noBtn.style.position = "absolute";
+
+        noBtn.style.transform =
+            `translate(${randomX}px, ${randomY}px) scale(${noSize})`;
+
+        // NO semakin kecil
+        noSize -= 0.12;
+
+        if (noSize < 0.25) {
+            noSize = 0.25;
+        }
+
+        // YES semakin besar
+        yesSize += 0.15;
+
+        if (yesSize > 2) {
+            yesSize = 2;
+        }
+
+        yesBtn.style.transform =
+            `scale(${yesSize})`;
+
+        createHeart();
+
+    }
+
+    // =========================
+    // YES
+    // =========================
+
+    function sayYes() {
+
+        letterPage.classList.add("hidden");
+        finalPage.classList.remove("hidden");
+
+        for (let i = 0; i < 30; i++) {
+
+            setTimeout(() => {
+                createHeart();
+            }, i * 100);
+
+        }
+
+    }
+
+    // =========================
+    // HATI
+    // =========================
+
+    function createHeart() {
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating-heart";
+
+        const hearts = ["❤️", "💕", "💗", "💖", "💘"];
+
+        heart.innerText =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 7000);
+
+    }
+
+</script>
+
+</body>
+</html>
